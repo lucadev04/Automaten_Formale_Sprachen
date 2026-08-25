@@ -30,7 +30,7 @@
 			\item $S$: Zustandsmenge
 			\item $\Sigma$: Terminalalphabet
 			\item $\Gamma$: Kelleralphabet
-			\item $\delta$: Zustandsüberführungsrelation, $\delta \subseteq S \times \Sigma \times \Gamma \times S \times \Gamma^*$
+			\item $\delta$: Zustandsüberführungsrelation, $\delta \subseteq S \times \left(\Sigma \cup \left\{\varepsilon\right\}\right) \times \Gamma \times S \times \Gamma^*$
 			\item $\#$: Kellerboden-Symbol, $\# \in \Gamma$
 			\item $s_0$: Startzustand, $s_0 \in S$
 			\item $F$: Menge von Endzuständen
@@ -70,7 +70,7 @@
 \begin{frame}{Zusammenhang mit kontextfreien Sprachen}
 	\begin{itemize}
 		\item zu jedem PDA lässt sich eine kontextfreie Grammatik konstruieren, die die gleiche Sprache generiert (siehe Folie \ref{Grammatik_aus_PDA})
-		\item zu jeder kontextfreien Grammatik lässt sich ein (i.Allg. nichtdeteministischer) PDA konstruieren, der die gleiche Sprache akzeptiert
+		\item zu jeder kontextfreien Grammatik lässt sich ein (i.Allg. nichtdeterministischer) PDA konstruieren, der die gleiche Sprache akzeptiert
 		\item Grundsätzlicher Zusammenhang mit kontextfreier Grammatik
 		\begin{itemize}
 			\item PDA kann mit Grammatik-Startsymbol $S$ als Kellerboden initialisiert werden
@@ -122,7 +122,8 @@
 			\item Startregel\\
 			$S\rightarrow [s_0, \#, s_i]$ für alle $s_i \in S$
 			\item Übergang $(s_j,a,A,s_k,B_1\ldots B_m)$\\
-			$[s_j,A,s_{m+1}] \rightarrow a[s_k,B_1,s_l]\ldots[s_m,B_m,s_{m+1}]$ für alle Kombinationen $s_l,\ldots,s_{m+1}$
+			$[s_j,A,p_m] \rightarrow a[p_0,B_1,p_1][p_1,B_2,p_2]\ldots[p_{m-1},B_m,p_m]$\\
+			mit $p_0=s_k$, für alle Kombinationen $p_1,\ldots,p_m \in S$
 			\item Übergang $(s_j,a,A,s_k,\varepsilon)$\\
 			$[s_j,A,s_k]\rightarrow a$
 		\end{itemize}
@@ -205,18 +206,19 @@
 		\item \underline{reguläre} Sprachen sind echt in den det. kontextfreien	Sprachen enthalten ( FA ist "`Kellerautomat ohne Keller"')
 		\item es gibt \underline{reguläre} Sprachen, die die Präfixeigenschaft nicht besitzen und damit in $L_\varepsilon(A)$ nicht enthalten sind (z.B. $\alpha=a|ab$)
 		\item es gibt \underline{reguläre} Sprachen, die die Präfixeigenschaft besitzen und damit in $L_\varepsilon(A)$ liegen (z.B. $\alpha=a|ba$)
-		\item es gibt Sprachen in $L_\varepsilon(A)$, die nicht regulär sind (z.B ${a^nb^n}$)
+		\item es gibt Sprachen in $L_\varepsilon(A)$, die nicht regulär sind (z.B. $\{a^nb^n\}$)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Exkurs: (N)FA im RL}
 Pac-Man \footnote{Applications of Deterministic Finite Automata, Eric Gribkoff, \url{https://www.cs.ucdavis.edu/~rogaway/classes/120/spring13/eric-dfa.pdf}}
 		\begin{columns}
-			\column{.5\textwidth}
+			\column{.4\textwidth}
 		\begin{figure}
-			\includegraphics[width=0.6\linewidth]{images/Pac-Man}
+			\includegraphics[width=0.9\linewidth]{images/Pac-Man}
 		\end{figure}
-		\column{.8\textwidth}
+		\column{.6\textwidth}
+		\resizebox{\linewidth}{!}{%
 		\begin{tikzpicture}
 			\node[state, initial] (w) {wander};
 			\node[state, right=3cm of w] (c) {chase};
@@ -231,15 +233,14 @@ Pac-Man \footnote{Applications of Deterministic Finite Automata, Eric Gribkoff, 
 				(f) edge[bend left=10, below] node{PM power-dn} (w)
 				(f) edge[below] node{eaten by PM} (r)
 				(r) edge[left] node{reach base} (w);
-		\end{tikzpicture}
+		\end{tikzpicture}}
 	\end{columns}
 \end{frame}
 
 \begin{frame}{Exkurs: PDA im RL}
 	Drehkreuz
 	\begin{center}
-		\begin{figure}
-			\includegraphics[width=\linewidth]{images/turnstile}
-		\end{figure}
+		% Zeichnung sitzt oben links auf einer leeren A4-Leinwand -> leeren Bereich wegschneiden
+		\includegraphics[trim=0 580bp 177bp 0, clip, width=0.55\linewidth]{images/turnstile}
 	\end{center}
 \end{frame}

@@ -47,7 +47,7 @@
 			\item $A \lor B$ überführen in Implikation $\neg A \rightarrow B$
 			\item Ist als Konklusion B eine Implikation zu zeigen, d.h.\\
 			$(A_1 \land \ldots \land A_k) \rightarrow (C \rightarrow D)$, dann kann stattdessen auch\\
-			$(A_1 \land \ldots \land A_k) \rightarrow D$ gezeigt werden
+			$(A_1 \land \ldots \land A_k \land C) \rightarrow D$ gezeigt werden
 		\end{itemize}
 		\item Beispiel\\
 			es gelten die Prämissen: $A, B \rightarrow C, (A \land B) \rightarrow (D \lor \neg C), B$;\\
@@ -76,13 +76,13 @@
 				\item \underline{direkter Beweis} $A \rightarrow B$
 				\item Beweis durch \underline{Umkehrschluss} (Kontraposition): zeige $\neg B \rightarrow \neg A$
 				\item \underline{Widerspruchsbeweis:} zeige $(A \land \neg B) \rightarrow f$
-				\item \underline{Äqzivalenzbeweis:}\\
+				\item \underline{Äquivalenzbeweis:}\\
 				zu zeigen: $A \leftrightarrow B$\\
 				stattdessen:\\
 				$A \rightarrow B$ und $B \rightarrow A$ bzw. $A \rightarrow B$ und $\neg A \rightarrow \neg B$
 				\item Beweis durch \underline{Fallunterscheidung:}\\
 				zeige A durch $B \rightarrow A$ und $\neg B \rightarrow A$
-				\item Beweis \underline{atomararer Aussagen:}\\
+				\item Beweis \underline{atomarer Aussagen:}\\
 				zeige A durch $w \rightarrow A$ bzw. $\neg A \rightarrow f$
 			\end{enumerate}
 		\column{.5\textwidth}
