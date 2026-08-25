@@ -8,7 +8,7 @@
 			\item Entscheidbarkeit des Wortproblems $w \in L$
 			\begin{itemize}
 				\item $L$ heißt entscheidbar gdw. es existiert ein Algorithmus, der für jedes $w \in \Sigma^*$ nach endlich vielen Schritten hält und die Antwort "`ja"' bzw. "`nein"' liefert
-				\item $L$ heißt semi-entscheidbar gdw. ex existiert ein Algorithmus, der für jedes $w \in L$ nach endlich vielen Schritten mit Antwort "`ja"' hält, für $w \notin L$ aber kein definiertes Antwortverhalten hat (z.B. gar nicht hält)
+				\item $L$ heißt semi-entscheidbar gdw. es existiert ein Algorithmus, der für jedes $w \in L$ nach endlich vielen Schritten mit Antwort "`ja"' hält, für $w \notin L$ aber kein definiertes Antwortverhalten hat (z.B. gar nicht hält)
 			\end{itemize}
 			\item es gilt
 			\begin{itemize}
@@ -40,7 +40,7 @@
 \begin{frame}{Semi-entscheidbare und rekursiv aufzählbare Sprachen}
 	\begin{itemize}
 		\item es gilt: $L$ ist entscheidbar gdw. $L$ und $\overline{L}$ sind semi-entscheidbar
-		\item Def: eine Sprache $L$ heißt \underline{rekursiv aufzählbar} gdw. es gibt eine berechenbare surjektive Funktion $f: \mathbb{N} \rightarrow L$, d.h. es gilt $L=\{f(1), f(2), \ldots\}$
+		\item Def: eine Sprache $L$ heißt \underline{rekursiv aufzählbar} gdw. $L=\varnothing$ oder es gibt eine berechenbare surjektive Funktion $f: \mathbb{N} \rightarrow L$, d.h. es gilt $L=\{f(1), f(2), \ldots\}$
 		\item Entscheidbare Sprachen werden alternativ auch als \underline{rekursive} Sprachen bezeichnet
 		\item es gilt: $L$ ist rekursiv aufzählbar gdw. $L$ ist semi-entscheidbar
 		\item es gilt: $L$ rekursiv aufzählbar $\rightarrow$ $L$ abzählbar; die Umkehrung gilt nicht
@@ -92,8 +92,8 @@
 		\item Ein-Band-TM\\
 		linksbeschränktes Band; unbeschränktes Band; Mehrspur-TM: LS-Köpfe fest verbunden
 		\item Mehr-Band-TM\\
-		$\delta(s, \{\sigma_1, \ldots, \sigma_k\}) = (s', \{\sigma_1', \ldots, \sigma_k'\},\{r_1,\ldots,r_k\})$\\
-		$\sigma_i \in \Gamma, \sigma_j' \in \Gamma, r_m \in \{L, R, N\}$, d.h. LS-Köpfe einzeln frei beweglich
+		$\delta(s, (\sigma_1, \ldots, \sigma_k)) = (s', (\sigma_1', \ldots, \sigma_k'),(r_1,\ldots,r_k))$\\
+		$\sigma_i \in \Gamma, \sigma_i' \in \Gamma, r_i \in \{L, R, N\}$, d.h. LS-Köpfe einzeln frei beweglich
 		\item Alle Varianten können sich gegenseitig simulieren und sind damit gleich mächtig
 		\item Bemerkung: Codierung Bandinhalt\\
 		natürliche Zahl $n \rightarrow |^n$ (unäre Darstellung, "`Bierdeckelnotation"'), oder Binärdarstellung
@@ -121,8 +121,8 @@
 
 \begin{frame}{Linear beschränkte Automaten (LBA) und kontextsensitive Sprachen}
 	\begin{itemize}
-		\item LBA: TM, die den Bandbereich auf dem die Eingabe steht niemals verlässt (in-place)
-		\item es gilt (Satz von Kuroda): die von einem (nichtdeterministischem) LBA akzeptierten Sprachen sind die kontextsensitiven Sprachen (Typ-1).\\
+		\item LBA: TM, die den Bandbereich, auf dem die Eingabe steht, niemals verlässt (in-place)
+		\item es gilt (Satz von Kuroda): die von einem (nichtdeterministischen) LBA akzeptierten Sprachen sind die kontextsensitiven Sprachen (Typ-1).\\
 		Beweisidee:
 		\begin{itemize}
 			\item Sei $L$ Typ-1; $(u \rightarrow v) \in P, |u|\leq |v|$;\\

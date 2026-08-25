@@ -105,8 +105,9 @@
 		\begin{itemize}
 			\item[Beweis:] konstruiere zu $A$ eine korrespondierende Grammatik $G=(S,\Sigma,P,S_0)$\\
 			\item[$S:$] $S_i=s_i$, insbesondere $S_0=s_0$
-			\item[$P:$] für jeden Übergang $\delta(s,a)=s'$ die Regel $S \rightarrow aS'$\\
-			zusätzlich die Regeln $S \rightarrow a$, falls $s'$ Endzustand und $S_0 \rightarrow \varepsilon$, falls $s_0$ Endzustand
+			\item[$P:$] für jeden Übergang $\delta(s_i,a)=s_j$ die Regel $S_i \rightarrow aS_j$\\
+			zusätzlich die Regel $S_i \rightarrow a$, falls $s_j$ Endzustand\\
+			ist $s_0$ Endzustand: neue Startvariable $S'$ mit $S' \rightarrow \varepsilon$ sowie allen Regeln von $S_0$ ($S'$ steht dann auf keiner rechten Seite)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -162,8 +163,8 @@
 			\item parallele schrittweise Verfolgung aller Verzweigungen (Breitensuchbaum)
 			\item Darstellung von $\delta$ als mengenwertige Funktion $\delta: S \times \Sigma \rightarrow \mathcal{P}(S)$
 			\item Erweiterung auf Folge von Konfigurationsübergängen\\
-			\quad $\hat{\delta}: \mathcal{P}(S) \times \Sigma^* \mapsto \mathcal{P}(S)$\\
-			\quad $\hat{\delta}(S', \varepsilon) = S'$ \quad $\hat{\delta}(S', av)=\hat{\delta}\left(\bigcup_{s \in S}, \delta(s,a),v\right)$ \quad $(S' \in \mathcal{P}(S))$
+			\quad $\hat{\delta}: \mathcal{P}(S) \times \Sigma^* \rightarrow \mathcal{P}(S)$\\
+			\quad $\hat{\delta}(S', \varepsilon) = S'$ \quad $\hat{\delta}(S', av)=\hat{\delta}\left(\bigcup_{s \in S'} \delta(s,a),\,v\right)$ \quad $(S' \in \mathcal{P}(S))$
 			\item Akzeptierte Sprache\\
 			\quad $L(A)=\left\{w \in \Sigma^* \mid \hat{\delta}(S_0,w)\cap F \neq \varnothing\right\}$
 		\end{itemize}
@@ -177,8 +178,7 @@
 		$A_d=\left(S_d, \Sigma, \delta_d, s_0^d, F_d\right)$ mit\\
 		\quad $S_d=\mathcal{P}(S)$; 
 		\quad $s_0^d=S_0 \in \mathcal{P}(S)$;
-		\quad $\delta_d(S', a)=\bigcup_{s \in S}$
-		\quad $\delta(s, a) \in \mathcal{P}(S)$\\
+		\quad $\delta_d(S', a)=\bigcup_{s \in S'} \delta(s, a) \in \mathcal{P}(S)$\\
 		\quad $F_d = \left\{S' \in \mathcal{P}(S) \mid S' \cap F \neq \varnothing\right\} \subseteq \mathcal{P}(S)$
 		\item es gilt: $w \in L(A)$ gdw. $\hat{\delta}(S_0, w) \cap F \neq \varnothing$\\
 		\quad gdw. $(s_0^d, w) \mapsto^* (s_f^d, \varepsilon), s_f^d \in F_d$ gdw. $w \in L(A_d)$
@@ -256,14 +256,14 @@
 		\begin{tikzpicture}
 			\node[state] (s0) {$s_0$};
 			
-			\node[state, initial, initial where=right, right=of s0s2] (s0s1) {$s_0s_1$};
+			\node[state, initial, initial where=below, below=of s0] (s0s1) {$s_0s_1$};
 			\node[state, accepting, right=of s0] (s0s1s2) {$s_0s_1s_2$};
 			
 			\draw
-			(s0) edge[bend left, below left] node{0} (s0s1)
+			(s0) edge[bend left, left] node{0} (s0s1)
 			(s0) edge[loop left] node{1} (s0)
-			(s0s1) edge[right] node{0} (s0s1s2)
-			(s0s1) edge[bend left, below left] node{1} (s0)
+			(s0s1) edge[below right] node{0} (s0s1s2)
+			(s0s1) edge[bend left, left] node{1} (s0)
 			(s0s1s2) edge[loop right] node{0} (s0s1s2)
 			(s0s1s2) edge[above] node{1} (s0);
 		\end{tikzpicture}
@@ -379,7 +379,7 @@
 \begin{frame}{Abgeschlossenheit regulärer Sprachen}
 	Seien $L, L_1, L_2$ reguläre Sprachen. Dann sind auch die folgenden Sprachen regulär:
 	\begin{itemize}
-		\item jede endliche Sprache $L_{3} \subset \Sigma^*$
+		\item jede endliche Sprache $L_{3} \subseteq \Sigma^*$
 		\item $L = \Sigma^*$
 		\item $L_1 \cup L_2$
 		\item $L_1 \setminus L_2$ (und damit auch Komplement $\Sigma^* \setminus L$)
@@ -411,7 +411,7 @@
 		\item Kleene's Theorem (umformuliert)\\
 		\quad Eine Sprache $L'$ ist regulär gdw.\\
 		\quad es existiert ein regulärer Ausdruck $\alpha$ mit $L'=L(\alpha)$.
-		\item Siehe auch: https://stackoverflow.com/questions/1732348
+		\item Siehe auch: \url{https://stackoverflow.com/questions/1732348}
 	\end{itemize}
 \end{frame}
 
@@ -507,7 +507,7 @@
 
 \begin{frame}{Pumping-Lemma für reguläre Sprachen}
 	\begin{itemize}
-		\item Wie kann man feststellen dass eine Sprache \underline{nicht} regulär ist?
+		\item Wie kann man feststellen, dass eine Sprache \underline{nicht} regulär ist?
 		\item Für reguläre Sprachen $L$ gilt das Pumping-Lemma:\\
 		Sei L regulär. Dann gibt es eine natürliche Zahl n so dass $\forall x \in L \textrm{ mit } |x|\geq n$ gilt:\\
 		$x$ lässt sich so in Teilworte $u, v, w$ zerlegen, d.h. $x=uvw$, dass
@@ -534,7 +534,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Zusamenfassung}
+\begin{frame}{Zusammenfassung}
 	\begin{itemize}
 		\item reguläre Grammatik ($w_1 \rightarrow w_2 \in P$)
 		\begin{itemize}

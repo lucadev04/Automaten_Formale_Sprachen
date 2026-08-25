@@ -53,11 +53,11 @@
 		\item Für alle Teilformeln der Art $w \rightarrow A$: markiere in allen Teilformeln auftretende $A$
 		\item while (es gibt Teilformeln der Art
 		\begin{enumerate}
-			\item[(i)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow B$ bzw. $1 \rightarrow B$ oder
+			\item[(i)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow B$ bzw. $w \rightarrow B$ oder
 			\item[(ii)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow f$\\
 			mit: alle $A_i$ markiert, $B$ nicht markiert)\\
 			if (Fall (i)) markiere alle B\\
-			else (Fall (ii)) Rückgabe "`unerfüllbar, STOP\\
+			else (Fall (ii)) Rückgabe "`unerfüllbar"', STOP\\
 			end
 		\end{enumerate}
 		end\\
@@ -73,22 +73,22 @@
 \note{\scriptsize
 	\begin{align*}
 		F &= (\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G\\
-		&= (A \land B \land D \rightarrow 0) \land (E \rightarrow 0) \land (C \rightarrow A) \land \\
-		& \qquad (1 \rightarrow C) \land (1 \rightarrow B) \land (G \rightarrow D) \land (1 \rightarrow G) \\
-		&= (A \land \stkout{B} \land D \rightarrow 0) \land (E \rightarrow 0) \land (\stkout{C} \rightarrow A) \land \\
-		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land (\stkout{G} \rightarrow D) \land \stkout{(1 \rightarrow G)} \\
-		&= (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0) \land (E \rightarrow 0) \land \stkout{(\stkout{C} \rightarrow A)} \land \\
-		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land \stkout{(\stkout{G} \rightarrow D)} \land \stkout{(1 \rightarrow G)}\\
-		& \textrm{unerfüllbar, wegen } (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0)
+		&= (A \land B \land D \rightarrow f) \land (E \rightarrow f) \land (C \rightarrow A) \land \\
+		& \qquad (w \rightarrow C) \land (w \rightarrow B) \land (G \rightarrow D) \land (w \rightarrow G) \\
+		&= (A \land \stkout{B} \land D \rightarrow f) \land (E \rightarrow f) \land (\stkout{C} \rightarrow A) \land \\
+		& \qquad \stkout{(w \rightarrow C)} \land \stkout{(w \rightarrow B)} \land (\stkout{G} \rightarrow D) \land \stkout{(w \rightarrow G)} \\
+		&= (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow f) \land (E \rightarrow f) \land \stkout{(\stkout{C} \rightarrow A)} \land \\
+		& \qquad \stkout{(w \rightarrow C)} \land \stkout{(w \rightarrow B)} \land \stkout{(\stkout{G} \rightarrow D)} \land \stkout{(w \rightarrow G)}\\
+		& \textrm{unerfüllbar, wegen } (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow f)
 	\end{align*}
 }
 \begin{frame}{Erfüllbarkeitstest (Hornklauselalgorithmus)}
 	Sei $S$ Menge von Hornklauseln\\
 	while ($S$ enthält eine positive Klausel $\left\{A_i\right\}$)\\
-	\qquad entferne alle Klauseln, die $A_i$ enhalten\\
+	\qquad entferne alle Klauseln, die $A_i$ enthalten\\
 	\qquad und entferne $\overline{A_i}$ aus den verbliebenen Klauseln\\
 	end\\
-	if ($S$ enhält die leere Klausel $\Box$)\\
+	if ($S$ enthält die leere Klausel $\Box$)\\
 	\qquad Rückgabe "`unerfüllbar"'\\
 	else Rückgabe "`erfüllbar"'\\
 	end
@@ -132,9 +132,8 @@ F &= \left\{\left\{\overline{A}, \overline{B}, \overline{D}\right\}, \left\{\ove
 		\begin{itemize}
 			\item sei $L$ ein Literal und $\overline{L}$ das negierte Literal
 			\item sei $K_1$ eine Klausel, die $L$ enthält, $K_2$ eine Klausel, die $\overline{L}$ enthält
-			\item dann heißt die Klausel $RES_L(K_1, K_2)=\left(K_1 \setminus \left\{L\right\}\right) \cup \left(K_2 \setminus \left\{\overline{L}\right\}\right)$
-			\item Gesprochen: "`Resolvente der Klauseln $K_1$ und $K_2$ nach $L$"'
-			\item Notation: $\left\{K_1, K_2\right\} \vdash_{res} RES_L$
+			\item dann heißt die Klausel $RES_L(K_1, K_2)=\left(K_1 \setminus \left\{L\right\}\right) \cup \left(K_2 \setminus \left\{\overline{L}\right\}\right)$,\\ gesprochen: \emph{Resolvente} der Klauseln $K_1$ und $K_2$ nach $L$
+			\item Notation: $\left\{K_1, K_2\right\} \vdash_{res} RES_L(K_1, K_2)$
 		\end{itemize}
 		\item Resolutionslemma\\
 		sei $I$ ein Modell von $K_1$ und $K_2$, dann ist $I$ auch Modell von $RES_L(K_1, K_2)$, d.h. $I \cap K_1 \neq \varnothing \land I \cap K_2 \neq \varnothing \rightarrow I \cap RES_L(K_1, K_2) \neq \varnothing$
@@ -151,7 +150,7 @@ Lemma: "`Hilfssatz"', auch "`Stichwort"' oder "`Hauptgedanke"'. Wird zum Beweise
 		\begin{itemize}
 			\item sei $S$ Klauselmenge; $n$ Anzahl der Variablen; definiere:\\
 			$RES_L(S)=S_L^0 \bigcup \left\{RES_L(K_1, K_2) \mid K_1 \in S_L^+, K_2 \in S_L^-\right\}$
-			\item beachte: $RES_L(S)$ enhält $L$ bzw. $\overline{L}$ nicht mehr
+			\item beachte: $RES_L(S)$ enthält $L$ bzw. $\overline{L}$ nicht mehr
 			\item es gilt: $S$ ist erfüllbar gdw. $RES_L(S)$ ist erfüllbar
 		\end{itemize}
 		\item Grundresolutionstheorem: eine Klauselmenge $S$ ist unerfüllbar gdw. $S$ lässt sich mittels Resolution widerlegen, d.h. die leere Klausel ist herleitbar

@@ -306,7 +306,7 @@ Beispiel DNF/KNF durch Umformung:
 	\begin{itemize}
 		\item Datentyp \texttt{boolean}\\
 		\texttt{p,q; //zulässige Werte: true, false}
-		\item Logische Verküpfungen\\
+		\item Logische Verknüpfungen\\
 		\begin{tabbing}
 			UND: \quad \= \texttt{\&\&}\\
 			ODER: \> \texttt{||}\\
@@ -367,11 +367,11 @@ Beispiel DNF/KNF durch Umformung:
 			$R_1 \circ R_2 = \left\{(a,c) \mid \textrm{es ex. ein } b \in B \textrm{ mit } (a,b) \in R_1, (b,c) \in R_2\right\}$
 		\item Inverse Relation $R^{-1}$\\
 			sei $R \subseteq A \times B \Rightarrow R^{-1}\subseteq B \times A$\\
-			$R^{-1}=(b,a) \mid a \in A, b \in B, (a,b) \in R$
+			$R^{-1}=\left\{(b,a) \mid a \in A, b \in B, (a,b) \in R\right\}$
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Binäre Relationen \emph{in einer} Menge $M: R \subset M \times M$}
+\begin{frame}{Binäre Relationen \emph{in einer} Menge $M: R \subseteq M \times M$}
 	\begin{itemize}
 		\item Bezeichnung: es gelte $a,b,c \in M$
 		\item \emph{Identität $I$:} $I=\left\{(a,a) \mid a \in M\right\}$

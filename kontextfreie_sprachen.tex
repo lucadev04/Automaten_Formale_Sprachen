@@ -12,7 +12,7 @@
 		\item Chomsky-Normalform
 		\begin{itemize}
 			\item zu jeder $\varepsilon$-freien, reduzierten kontextfreien Grammatik $G$ ohne Kettenregeln lässt sich eine äquivalente Grammatik $G'$ angeben, die nur Regeln der Art $A \rightarrow a$ bzw. $A \rightarrow BC$ enthält.
-			\item Konstuktion: Ausgangspunkt $A\rightarrow X_1X_2 \ldots X_m, m\geq 2, X_i \in V \cup \Sigma$
+			\item Konstruktion: Ausgangspunkt $A\rightarrow X_1X_2 \ldots X_m, m\geq 2, X_i \in V \cup \Sigma$
 			\begin{itemize}
 				\item für $X_i=a\in \Sigma$ neue Variable $X_a$ mit $X_a \rightarrow a$ einführen
 				\item verbleibende Regeln $A \rightarrow B_1B_2\ldots B_m, B_i \in V, m\geq 3$:\\
@@ -24,7 +24,7 @@
 \end{frame}
 
 \begin{frame}{Beispiel: Erzeugung Chomsky-Normalform}
-	$G=(\{S, A, B, C, D, E\}, \{a, b\}, P, S)$\\
+	$G=(\{S, A, B, C, D, E\}, \{a, b, c, d\}, P, S)$\\
 	$P=\{$\\
 	\qquad\qquad $S \rightarrow bA \mid aB \mid C \mid Cb,$\\
 	\qquad\qquad $A \rightarrow bAA \mid aS \mid a \mid bE \mid bDb,$\\
@@ -46,7 +46,7 @@
 		$j=1: V[i,1]=\{X \in V \mid (X\rightarrow a_i) \in P\}$\\
 		$j>1: V[i,j]=\bigcup_{l=1}^{j-1}\{A\in V\mid \exists (A\rightarrow BC): B \in V[i,l] \land C \in V[i+l, j-l] \}$
 		\item Wortproblem mit polynomiellem Zeitaufwand $O(n^3)$ lösbar
-		\item Grammatik ist mehrdeutig, falls ein $V[i,j]$ mehrere Einträge hat, die von $S$ aus erreicht werden können
+		\item Grammatik ist mehrdeutig, falls ein Eintrag $A \in V[i,j]$ auf mehr als eine Weise entsteht
 	\end{itemize}
 \end{frame}
 
